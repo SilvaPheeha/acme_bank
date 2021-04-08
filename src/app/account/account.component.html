@@ -1,0 +1,46 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-withdraw">Success</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<div class="container">
+  <div class="card mt-5">
+    <div class="card-header">Account List</div>
+    <div class="table-responsive-sm">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="accounts$ | async as accounts">
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.accountNumber }}</td>
+            <td>{{ account.accountType }}</td>
+            <td>{{ account.balance }}</td>
+            <th>
+              <button
+                type="button"
+                [disabled]="canWithdraw(account)"
+                class="btn btn-success"
+                (click)="open(content)"
+              >
+                Withdraw
+              </button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-header">Balance {{ balance }}</div>
+  </div>
+</div>
