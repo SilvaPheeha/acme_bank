@@ -9,3 +9,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## State Management (ngRX)
 
 This project uses ngRx state management [ngRx Doc](https://ngrx.io/)
+
+## TODO
+
+#### Add Cypress
+#### Add CI-CD pipeline
+#### Add Dockerfile
