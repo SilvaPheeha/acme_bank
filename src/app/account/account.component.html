@@ -9,11 +9,11 @@
   </div>
 </ng-template>
 
-<div class="container">
+<div class="container mb-2">
   <div class="card mt-5">
-    <div class="card-header">Account List</div>
+    <div class="card-header acme-card-header">Account List</div>
     <div class="table-responsive-sm">
-      <table class="table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Account Number</th>
@@ -24,9 +24,9 @@
         </thead>
         <tbody *ngIf="accounts$ | async as accounts">
           <tr *ngFor="let account of accounts">
-            <td>{{ account.accountNumber }}</td>
-            <td>{{ account.accountType }}</td>
-            <td>{{ account.balance }}</td>
+            <td>{{ account.account_number }}</td>
+            <td>{{ account.account_type }}</td>
+            <td>{{ addCurrency(account.balance) }}</td>
             <th>
               <button
                 type="button"
@@ -41,6 +41,10 @@
         </tbody>
       </table>
     </div>
-    <div class="card-header">Balance {{ balance }}</div>
+    <div class="card-header acme-card-footer d-flex justify-content-start">
+      <div>Balance</div>
+      <div class="w-50"></div>
+      <div>{{ addCurrency(balance.toString()) }}</div>
+    </div>
   </div>
 </div>

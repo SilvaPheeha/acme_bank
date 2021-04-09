@@ -10,7 +10,7 @@ const getAccountFeatureState = createFeatureSelector<AccountState>('accounts');
 
 export const getCurrentAccountNumber = createSelector(
   getAccountFeatureState,
-  state => state.currentAccountNumber
+  (state) => state.currentAccountNumber
 );
 
 export const getCurrentAccount = createSelector(
@@ -19,22 +19,24 @@ export const getCurrentAccount = createSelector(
   (state, currentAccountNumber) => {
     if (currentAccountNumber === '') {
       return {
-        accountNumber: '',
-        accountType: '',
+        account_number: '',
+        account_type: '',
         balance: '',
       };
     } else {
-      return currentAccountNumber ? state.Accounts.find(a => a.accountNumber === currentAccountNumber) : null;
+      return currentAccountNumber
+        ? state.Accounts.find((a) => a.account_number === currentAccountNumber)
+        : null;
     }
   }
 );
 
 export const getAccounts = createSelector(
   getAccountFeatureState,
-  state => state.Accounts
+  (state) => state.Accounts
 );
 
 export const getError = createSelector(
   getAccountFeatureState,
-  state => state.error
+  (state) => state.error
 );

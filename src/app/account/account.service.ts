@@ -20,11 +20,11 @@ export class AccountService {
 
   updateAccount(Trans: Account): Observable<Account> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${environment.accountsUrl}/${Trans.accountNumber}`;
+    const url = `${environment.accountsUrl}/${Trans.account_number}`;
     return this.http
       .put<Account>(url, Trans, { headers })
       .pipe(
-        tap(() => console.log('Updated Account: ' + Trans.accountNumber)),
+        tap(() => console.log('Updated Account: ' + Trans.account_number)),
         map(() => Trans),
         catchError((e) => throwError(e))
       );

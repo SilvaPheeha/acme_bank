@@ -10,18 +10,7 @@ export interface AccountState {
 
 const initialState: AccountState = {
   currentAccountNumber: '',
-  Accounts: [
-    {
-      accountNumber: '6331103626640816',
-      accountType: 'cheque',
-      balance: '-296.65',
-    },
-    {
-      accountNumber: '5248117462997084',
-      accountType: 'savings',
-      balance: '-20.00',
-    },
-  ],
+  Accounts: [],
   error: '',
 };
 
@@ -51,14 +40,14 @@ export const AccountReducer = createReducer<AccountState>(
     AccountsApiActions.updateAccountSuccess,
     (state, action): AccountState => {
       const updatedAccounts = state.Accounts.map((item) =>
-        action.Account.accountNumber === item.accountNumber
+        action.Account.account_number === item.account_number
           ? action.Account
           : item
       );
       return {
         ...state,
         Accounts: updatedAccounts,
-        currentAccountNumber: action.Account.accountNumber,
+        currentAccountNumber: action.Account.account_number,
         error: '',
       };
     }

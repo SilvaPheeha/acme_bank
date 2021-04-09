@@ -28,17 +28,17 @@ export class AccountComponent implements OnInit {
   constructor(private store: Store<State>, private modalService: NgbModal) {}
 
   ngOnInit(): void {
-    // this.store.dispatch(AccountsPageActions.loadAccounts());
+    this.store.dispatch(AccountsPageActions.loadAccounts());
     this.accounts$ = this.store.select(getAccounts);
     this.errorMessage$ = this.store.select(getError);
     this.selectedAccount$ = this.store.select(getCurrentAccount);
     this.accounts$.pipe(map((acc) => acc.map((a) => +a.balance))).subscribe({
-      next: (b) => this.balance = b.reduce((prev, curr) => prev + curr, 0),
+      next: (b) => (this.balance = b.reduce((prev, curr) => prev + curr, 0)),
     });
   }
 
   canWithdraw(acc: Account): boolean {
-    switch (acc.accountType) {
+    switch (acc.account_type) {
       case AccountType.cheque:
         return +acc.balance <= CHEQUE_DISABLER;
       case AccountType.savings:
@@ -48,7 +48,13 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  addCurrency(balance: string): string {
+    return balance.slice(0, 1) === '-'
+      ? ` ${balance.slice(0, 1)}ZAR ${balance.slice(1)}`
+      : `ZAR ${balance}`;
+  }
+
   open(content: any): void {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-withdraw'});
+    this.modalService.open(content, { ariaLabelledBy: 'modal-withdraw' });
   }
 }
